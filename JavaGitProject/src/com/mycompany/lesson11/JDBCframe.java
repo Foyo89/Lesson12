@@ -22,7 +22,7 @@ public class JDBCframe extends javax.swing.JFrame {
     
     private static String url = "jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false";
     private static String userName = "root";
-    private static String password = "root";
+    private static String password = "";
 
     /**
      * Creates new form JDBCframe
@@ -154,12 +154,22 @@ public class JDBCframe extends javax.swing.JFrame {
             PreparedStatement preparedStatement = null;
             
             
-            String sql = "INSERT INTO users (first_name, last_name) VALUES ('"+txtFirstName.getText()+"', '"+txtLastName.getText()+"')";
-            //JOptionPane.showMessageDialog(this, "INSERT INTO users (first_name, last_name) VALUES ('"+txtFirstName.getText()+"', '"+txtLastName.getText()+"')");
-            preparedStatement = connection.prepareStatement(sql);
+            //String sql = "INSERT INTO users (first_name, last_name) VALUES ('";
+            if (txtFirstName.getText().isEmpty()==false && txtLastName.getText().isEmpty()==false){
+                
+                preparedStatement = connection.prepareStatement("INSERT INTO users (first_name, last_name) VALUES (?,?)");
+                preparedStatement.setString(1, txtFirstName.getText());
+                preparedStatement.setString(2, txtLastName.getText());
+                //String sql = "INSERT INTO users (first_name, last_name) VALUES ('"+txtFirstName.getText()+"', '"+txtLastName.getText()+"')";
+                //JOptionPane.showMessageDialog(this, "INSERT INTO users (first_name, last_name) VALUES ('"+txtFirstName.getText()+"', '"+txtLastName.getText()+"')");
+                //JOptionPane.showMessageDialog(this, preparedStatement.toString());
+                //preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Dodano rekord do bazy danych");
+                preparedStatement.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Dodano rekord do bazy danych");
+            }else 
+                JOptionPane.showMessageDialog(this, "Pola są puste");
+            
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JDBCframe.class.getName()).log(Level.SEVERE, null, ex);
