@@ -155,7 +155,7 @@ public class JDBCframe extends javax.swing.JFrame {
             
             
             String sql = "INSERT INTO users (first_name, last_name) VALUES ('"+txtFirstName.getText()+"', '"+txtLastName.getText()+"')";
-            JOptionPane.showMessageDialog(this, "INSERT INTO users (first_name, last_name) VALUES ('"+txtFirstName.getText()+"', '"+txtLastName.getText()+"')");
+            //JOptionPane.showMessageDialog(this, "INSERT INTO users (first_name, last_name) VALUES ('"+txtFirstName.getText()+"', '"+txtLastName.getText()+"')");
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.executeUpdate();
