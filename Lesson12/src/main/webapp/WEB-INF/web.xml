@@ -28,6 +28,10 @@
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>pl.sda.web.jsp.HelloServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DbShowServlet</servlet-name>
+        <servlet-class>pl.sda.web.jsp.DbShowServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/HelloServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DbShowServlet</servlet-name>
+        <url-pattern>/DbShowServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

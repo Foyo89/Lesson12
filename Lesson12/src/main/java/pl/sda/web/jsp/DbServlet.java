@@ -8,6 +8,8 @@ package pl.sda.web.jsp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,24 +87,30 @@ public class DbServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServletContext ctx = getServletContext();
+        //ServletContext ctx = getServletContext();
 
         //initialize DB Connection
-        String dbURL = ctx.getInitParameter("jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false");
-        String user = ctx.getInitParameter("root");
-        String pwd = ctx.getInitParameter("root");
+//        String dbURL = ctx.getInitParameter("jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false");
+//        String user = ctx.getInitParameter("root");
+//        String pwd = ctx.getInitParameter("root");
         
         try {
-            DBConnectionManager connectionManager = new DBConnectionManager("jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false", "root", "root");
-            ctx.setAttribute("DBConnection", connectionManager.getConnection());
-            Connection con = (Connection) getServletContext().getAttribute("DBConnection");
-            java.sql.PreparedStatement ps = null;
+            String url = "jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false";
+            String userName = "root";
+            String password = "root";
+            
+            
+            DBConnectionManager dbConnectionManager = new DBConnectionManager(url, userName, password);
+            Connection connection = dbConnectionManager.getConnection();
+            //ctx.setAttribute("DBConnection", connectionManager.getConnection());
+            //Connection con = (Connection) getServletContext().getAttribute("DBConnection");
+            PreparedStatement preparedStatement = null;
             try {
-                //ps = con.prepareStatement("insert into users(first_name, last_name) values (?,?)");
-                ps = con.prepareStatement("insert into users(first_name, last_name) values ('raz','dwa')");
-//                ps.setString(1, request.getParameter("firstname"));
-//                ps.setString(2, request.getParameter("lastname"));    
-                ps.execute();
+                preparedStatement = connection.prepareStatement("insert into users_servlets(first_name, last_name, add_date) values (?,?,now())");
+                //preparedStatement = connection.prepareStatement("insert into users(first_name, last_name) values ('raz','dwa')");
+                preparedStatement.setString(1, request.getParameter("firstname"));
+                preparedStatement.setString(2, request.getParameter("lastname")); 
+                preparedStatement.execute();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -114,12 +122,14 @@ public class DbServlet extends HttpServlet {
                 out.println("<title>Servlet DbServlet</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<h4><a href='/servlet/DbServlet'>Powrót</a></h4>");
+                out.println("<h4><a href='/Lesson12/MyServlet'>Powrót</a></h4>");
                 out.println("</body>");
                 out.println("</html>");
             }
         } catch (ClassNotFoundException ex) {
+            String message = ex.getMessage();
             Logger.getLogger(DbServlet.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (SQLException ex) {
             Logger.getLogger(DbServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

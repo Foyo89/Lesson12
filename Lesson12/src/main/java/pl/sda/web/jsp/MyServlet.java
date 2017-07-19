@@ -60,10 +60,14 @@ public class MyServlet extends HttpServlet {
             
             out.println("</p>");
             
+            
             if(request.getParameter("firstname") != null && request.getParameter("lastname") != null)
                 out.println("<h2>Witaj "+request.getParameter("firstname")+" "+request.getParameter("lastname")+"</h2>");
             
             out.println("</p>");
+            
+            out.println("<a href='/Lesson12/DbServlet'>Dodaj do bazy</a>");
+            out.println("<a href='/Lesson12/DbShowServlet'>Pokaż bazę</a>");
             
             HttpSession session = request.getSession();
             if (session.isNew()) {
