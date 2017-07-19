@@ -87,12 +87,7 @@ public class DbServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //ServletContext ctx = getServletContext();
 
-        //initialize DB Connection
-//        String dbURL = ctx.getInitParameter("jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false");
-//        String user = ctx.getInitParameter("root");
-//        String pwd = ctx.getInitParameter("root");
         
         try {
             String url = "jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false";
@@ -102,12 +97,10 @@ public class DbServlet extends HttpServlet {
             
             DBConnectionManager dbConnectionManager = new DBConnectionManager(url, userName, password);
             Connection connection = dbConnectionManager.getConnection();
-            //ctx.setAttribute("DBConnection", connectionManager.getConnection());
-            //Connection con = (Connection) getServletContext().getAttribute("DBConnection");
+            
             PreparedStatement preparedStatement = null;
             try {
-                preparedStatement = connection.prepareStatement("insert into users_servlets(first_name, last_name, add_date) values (?,?,now())");
-                //preparedStatement = connection.prepareStatement("insert into users(first_name, last_name) values ('raz','dwa')");
+                preparedStatement = connection.prepareStatement("insert into users_servlets(first_name, last_name, add_date) values (?,?,now())");               
                 preparedStatement.setString(1, request.getParameter("firstname"));
                 preparedStatement.setString(2, request.getParameter("lastname")); 
                 preparedStatement.execute();
@@ -126,8 +119,7 @@ public class DbServlet extends HttpServlet {
                 out.println("</body>");
                 out.println("</html>");
             }
-        } catch (ClassNotFoundException ex) {
-            String message = ex.getMessage();
+        } catch (ClassNotFoundException ex) {            
             Logger.getLogger(DbServlet.class.getName()).log(Level.SEVERE, null, ex);
             
         } catch (SQLException ex) {

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Grzegorz
  */
-public class DbShowServlet extends HttpServlet {
+public class ShowBooksServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class DbShowServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DbShowServlet</title>");            
+            out.println("<title>Servlet ShowBooksServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DbShowServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ShowBooksServlet at " + request.getContextPath() + "</h1>");
             
             try {
             String url = "jdbc:mysql://localhost/books_db?serverTimezone=CET&useSSL=false";
@@ -59,24 +59,24 @@ public class DbShowServlet extends HttpServlet {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
             try {
-                preparedStatement = connection.prepareStatement("SELECT * FROM users_servlets");              
+                preparedStatement = connection.prepareStatement("SELECT * FROM books");              
                 resultSet = preparedStatement.executeQuery();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             
-            out.println("<table style=\"width:20%\" border= 1px solid black>");
+            out.println("<table style=\"width:30%\" border= 1px solid black>");
             out.println("<tr>");
-            out.println("<th>Imię</th>");
-            out.println("<th>Nazwisko</th>");
-            out.println("<th>Data dodania</th>");
+            out.println("<th>Tytuł</th>");
+            out.println("<th>ISBN</th>");
+            out.println("<th>Data wydania</th>");
             out.println("</tr>");
             
             while (resultSet.next()){
                 out.println("<tr>");
-                out.println("<td>"+resultSet.getString("first_name")+"</td>");
-                out.println("<td>"+resultSet.getString("last_name")+"</td>");
-                out.println("<td>"+resultSet.getString("add_date")+"</td>");
+                out.println("<td>"+resultSet.getString("title")+"</td>");
+                out.println("<td>"+resultSet.getString("isbn")+"</td>");
+                out.println("<td>"+resultSet.getString("release_date")+"</td>");
                 out.println("</tr>");
             }
                 out.println("</table>");
@@ -92,13 +92,12 @@ public class DbShowServlet extends HttpServlet {
                 out.println("</body>");
                 out.println("</html>");
             
-        } catch (ClassNotFoundException ex) {       
+        } catch (ClassNotFoundException ex) {    
             Logger.getLogger(DbServlet.class.getName()).log(Level.SEVERE, null, ex);
             
         } catch (SQLException ex) {
             Logger.getLogger(DbServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
             
             out.println("</body>");
             out.println("</html>");

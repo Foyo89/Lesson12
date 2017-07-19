@@ -41,6 +41,7 @@ public class MyServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            //out.println("<meta charset=\"utf-8\">");
             out.println("<title>Servlet MyServlet</title>");            
             out.println("</head>");
             out.println("<body>");
@@ -66,8 +67,13 @@ public class MyServlet extends HttpServlet {
             
             out.println("</p>");
             
-            out.println("<a href='/Lesson12/DbServlet'>Dodaj do bazy</a>");
-            out.println("<a href='/Lesson12/DbShowServlet'>Pokaż bazę</a>");
+            out.println("<a href='/Lesson12/DbServlet'>Dodaj użytkownika do bazy</a>");
+            out.println("</p>");
+            out.println("<a href='/Lesson12/DbShowServlet'>Pokaż bazę użytkowników</a>");
+            out.println("</p>");
+            out.println("<a href='/Lesson12/AddBookServlet'>Dodaj książkę do bazy</a>");
+            out.println("</p>");
+            out.println("<a href='/Lesson12/ShowBooksServlet'>Pokaż bazę książek</a>");
             
             HttpSession session = request.getSession();
             if (session.isNew()) {

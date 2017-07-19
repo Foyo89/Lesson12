@@ -32,6 +32,14 @@
         <servlet-name>DbShowServlet</servlet-name>
         <servlet-class>pl.sda.web.jsp.DbShowServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddBookServlet</servlet-name>
+        <servlet-class>pl.sda.web.jsp.AddBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowBooksServlet</servlet-name>
+        <servlet-class>pl.sda.web.jsp.ShowBooksServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>DbShowServlet</servlet-name>
         <url-pattern>/DbShowServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBookServlet</servlet-name>
+        <url-pattern>/AddBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowBooksServlet</servlet-name>
+        <url-pattern>/ShowBooksServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
