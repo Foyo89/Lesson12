@@ -83,6 +83,8 @@ public class MyFilter implements Filter {
 	PrintWriter respOut = new PrintWriter(response.getWriter());
 	respOut.println("<P><B>This has been appended by an intrusive filter.</B>");
          */
+        
+        
     }
 
     /**
@@ -97,7 +99,7 @@ public class MyFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         if (debug) {
             log("MyFilter:doFilter()");
         }
@@ -106,6 +108,10 @@ public class MyFilter implements Filter {
         
         Throwable problem = null;
         try {
+            PrintWriter respOut = response.getWriter();
+            
+            String paramValue = filterConfig.getServletContext().getInitParameter("version");
+            respOut.println("<P><B>This has been appended by an intrusive filter. Numer wersji: "+paramValue+"</B>");
             chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
@@ -116,6 +122,7 @@ public class MyFilter implements Filter {
         }
         
         doAfterProcessing(request, response);
+        
 
         // If there was a problem, we want to rethrow it if it is
         // a known type, otherwise log it.

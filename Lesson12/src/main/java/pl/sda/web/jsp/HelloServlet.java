@@ -11,16 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Grzegorz
+ * @author RENT
  */
-public class MyServlet extends HttpServlet {
-    
-    
-    
+public class HelloServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,57 +32,19 @@ public class MyServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-//            if (request.getMethod().equals("GET"))
-//                response.sendRedirect("/Lesson12/");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MyServlet</title>");            
+            out.println("<title>Servlet HelloServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MyServlet at " + request.getContextPath() + "</h1>");
-            out.println("<h3>wersja aplikacji: " + getServletContext().getInitParameter("version") + "</h3>");
-            if (request.getParameter("param1") != null && request.getParameter("param2") != null)
-            out.println("<p>param1 = "+request.getParameter("param1")+" param2 = "+request.getParameter("param2")+"</p>");
-            out.println("<a href='/Lesson12/ParameterServlet?param1=33&param2=44'>ParameterServlet link</a></p>");
-            
-            out.println("<form action=\"/Lesson12/HelloServlet\" method=\"post\">");
-            out.println("First name:<br>");
-            out.println("<input type=\"text\" name=\"firstname\"><br>");
-            out.println("Last name:<br>");
-            out.println("<input type=\"text\" name=\"lastname\"></p>");
-            out.println("<input type=\"submit\" value=\"Submit\">");
-            out.println("</form>");
-            
-            out.println("</p>");
-            
+            out.println("<h1>Servlet HelloServlet at " + request.getContextPath() + "</h1>");
             if(request.getParameter("firstname") != null && request.getParameter("lastname") != null)
                 out.println("<h2>Witaj "+request.getParameter("firstname")+" "+request.getParameter("lastname")+"</h2>");
             
             out.println("</p>");
-            
-            HttpSession session = request.getSession();
-            if (session.isNew()) {
-                session.setAttribute("licznik", 1);               
-            }else {
-                Integer counter = Integer.valueOf(session.getAttribute("licznik").toString());
-                session.setAttribute("licznik", ++counter);
-            }
-            out.println("<h5>Licznik: "+session.getAttribute("licznik")+"</h5>");
-            
-            
-//            Object attribute = session.getAttribute("licznik");
-//            Integer counter = null;
-//            if (attribute != null) {
-//                counter = Integer.valu;               
-//            }else {
-//                Integer counter = Integer.valueOf(session.getAttribute("licznik").toString());
-//                session.setAttribute("licznik1", ++counter);
-//            }
-//            out.println("<h5>Licznik: "+session.getAttribute("licznik1")+"</h5>");
-//            
-            //out.println("<p>"+request.getAttribute("Filtr1")+"</p>");
-            
+            out.println("<p>param1 = "+request.getParameter("param1")+" param2 = "+request.getParameter("param2")+"</p>");
+            out.println("<a href='/Lesson12/MyServlet?param1=1234&param2=5678'>servlet link</a></p>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -104,9 +62,8 @@ public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.sendRedirect("/Lesson12/");
         processRequest(request, response);
-        
     }
 
     /**

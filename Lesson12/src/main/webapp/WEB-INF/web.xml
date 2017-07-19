@@ -20,9 +20,25 @@
             <param-value>666</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>ParameterServlet</servlet-name>
+        <servlet-class>pl.sda.web.jsp.ParameterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>pl.sda.web.jsp.HelloServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ParameterServlet</servlet-name>
+        <url-pattern>/ParameterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/HelloServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
